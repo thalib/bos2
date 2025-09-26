@@ -37,6 +37,8 @@ applyTo: 'apps/frontend/**/*.{vue,ts,js,md,json,scss,css,yml}'
 - Place documentation in `docs/` mirroring the source structure
 - Use markdown files for component and feature documentation
 - Document complex composables and utilities
+- **NEVER** create README.md or documentation files inside the source code directories
+- Example: `apps/frontend/app/components/Header/Navbar.vue` → `docs/frontend/app/components/Header/Navbar.md`
 
 ## Testing
 - Place tests in `apps/frontend/tests/` mirroring the source structure
@@ -76,8 +78,12 @@ const transformedData = computed(() => data.value?.field)
 
 ## Styling Guidelines
 - Use **Bootstrap 5.3** CSS classes for all UI styling
+- **NEVER** use custom CSS unless absolutely necessary - prefer Bootstrap utilities
+- Never modify or override any Bootstrap CSS classes, create custom classes instead
 - Avoid inline CSS styling; always use classes for styling
 - Use **Bootstrap Icons** for icons (https://icons.getbootstrap.com/)
+- Remove `<style scoped>` blocks that contain custom CSS that can be achieved with Bootstrap
+- If custom CSS is truly necessary, document why Bootstrap classes cannot achieve the same result
 
 ## References
 - [Vue Style Guide](https://vuejs.org/style-guide/)
