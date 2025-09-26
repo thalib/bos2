@@ -33,10 +33,15 @@ applyTo: 'apps/frontend/**/*.{vue,ts,js,md,json,scss,css,yml}'
 - Place layouts in `apps/frontend/app/layouts/`
 - Place static assets in `apps/frontend/public/`
 
+## Documentation
+- Place documentation in `docs/` mirroring the source structure
+- Use markdown files for component and feature documentation
+- Document complex composables and utilities
+
 ## Testing
 - Place tests in `apps/frontend/tests/` mirroring the source structure
 - Use Vitest for unit/integration tests
-- Use Playwright or Cypress for E2E tests
+- Use Playwright for E2E tests
 
 ## Linting & Formatting
 - Use ESLint with Vue/TypeScript plugins
@@ -44,11 +49,12 @@ applyTo: 'apps/frontend/**/*.{vue,ts,js,md,json,scss,css,yml}'
 
 ## GraphQL Integration
 - Use `useGraphql` composable for all GraphQL operations
-- Configure GraphQL endpoint in `nuxt.config.ts` runtimeConfig
+- Configure GraphQL endpoint in `nuxt.config.ts` runtimeConfig and `.env` file
 - Handle GraphQL errors with proper error boundaries
 - Use TypeScript generics for type-safe GraphQL responses
 - Debug GraphQL requests/responses using console logs during development
 - Use `computed()` for reactive data transformations from GraphQL responses
+- Optimize for SPA deployment (client-side rendering)
 
 ### GraphQL Query Pattern
 ```typescript

@@ -12,8 +12,8 @@ export default defineNuxtConfig({
     },
   },
 
-  // Enable SSR for better performance and SEO
-  ssr: true,
+  // Disable SSR for SPA deployment - private app, no SEO needed
+  ssr: false,
 
   // TypeScript configuration - simplified for development
   typescript: {
@@ -38,7 +38,7 @@ export default defineNuxtConfig({
     scanPageMeta: true,
   },
 
-  // Nitro configuration for better GraphQL integration
+  // Nitro configuration optimized for SPA
   nitro: {
     // Enable CORS for development
     devProxy: {
@@ -47,6 +47,19 @@ export default defineNuxtConfig({
         changeOrigin: true,
         prependPath: true,
       }
+    },
+    // Optimize for SPA deployment
+    prerender: {
+      crawlLinks: false
+    }
+  },
+
+  // SPA-specific optimizations
+  app: {
+    // Optimize bundle for client-side rendering
+    head: {
+      viewport: 'width=device-width, initial-scale=1',
+      charset: 'utf-8'
     }
   }
 })
