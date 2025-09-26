@@ -26,31 +26,23 @@
 
 <script setup lang="ts">
 // GraphQL query string
-const LAUNCHES_QUERY = `
+const BOOKS_QUERY = `
   query GetBooks {
     books {
-        title
-        author
+      title
+      author
     }
-}
+  }
 `
 
-// Use the custom composable to fetch data
-const { data, pending, error } = await useGraphql(LAUNCHES_QUERY)
+// Initialize GraphQL client with debug mode
+const graphql = useGraphql({ debug: true })
+
+// Use the query method to fetch books data
+const { data, pending, error } = await graphql.query(BOOKS_QUERY)
 
 // Extract books from the data with reactive computed
 const books = computed(() => {
-  console.log('📖 Books in component:', data.value)
   return data.value?.books
 })
-
-// Debug the reactive values
-watch([data, pending, error], ([newData, newPending, newError]) => {
-  console.log('🔍 Component state changed:', { 
-    data: newData, 
-    pending: newPending, 
-    error: newError 
-  })
-}, { immediate: true })
-
 </script>
