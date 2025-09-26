@@ -23,7 +23,8 @@ export default defineNuxtConfig({
 
   // CSS configuration
   css: [
-    // Global CSS files can be added here
+    'bootstrap/dist/css/bootstrap.min.css',
+    'bootstrap-icons/font/bootstrap-icons.css'
   ],
 
   // Development configuration
