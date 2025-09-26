@@ -74,6 +74,11 @@ const { data, pending, error } = await useGraphql<QueryResponse>(QUERY)
 const transformedData = computed(() => data.value?.field)
 ```
 
+## Styling Guidelines
+- Use **Bootstrap 5.3** CSS classes for all UI styling
+- Avoid inline CSS styling; always use classes for styling
+- Use **Bootstrap Icons** for icons (https://icons.getbootstrap.com/)
+
 ## References
 - [Vue Style Guide](https://vuejs.org/style-guide/)
 - [Nuxt Best Practices](https://nuxt.com/docs/guide/concepts/best-practices)
