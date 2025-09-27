@@ -30,7 +30,7 @@
           </button>
 
           <!-- User Dropdown -->
-          <div class="dropdown">
+          <div class="dropdown position-relative">
             <button
               class="btn btn-outline-secondary d-flex align-items-center justify-content-center rounded-2 navbar-btn"
               style="width: 40px; height: 40px;"
@@ -39,9 +39,9 @@
             >
               <i class="bi bi-person fs-5"></i>
             </button>
-            <ul v-show="showUserMenu" class="dropdown-menu dropdown-menu-end show position-absolute shadow-lg border-0" style="top: calc(100% + 0.5rem); z-index: 1050; min-width: 150px;">
+            <ul v-show="showUserMenu" class="dropdown-menu dropdown-menu-end show position-absolute shadow-sm" style="top: calc(100% + 0.5rem); right: 0; left: auto; z-index: 1050; min-width: 150px;">
               <li>
-                <button class="dropdown-item d-flex align-items-center py-2" @click="logout">
+                <button class="dropdown-item d-flex align-items-center py-0" @click="logout">
                   <i class="bi bi-box-arrow-right me-2"></i>
                   Logout
                 </button>

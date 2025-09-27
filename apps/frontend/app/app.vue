@@ -2,6 +2,7 @@
   <div>
     <HeaderNavbar />
     <NuxtPage />
+    <CommonFooter />
   </div>
 </template>
 
