@@ -9,6 +9,7 @@
     <HeaderNavbar />
     <HeaderSidebar />
     <NuxtPage />
+    <CommonFooter />
   </div>
 </template>
 

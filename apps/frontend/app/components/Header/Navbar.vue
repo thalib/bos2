@@ -7,8 +7,7 @@
         <!-- Left Side: Home Icon + Current Page Title -->
         <div class="d-flex align-items-center">
           <button
-            class="btn btn-outline-secondary me-3 d-flex align-items-center justify-content-center rounded-2 navbar-btn"
-            style="width: 40px; height: 40px;"
+            class="btn btn-outline-secondary me-3 d-flex align-items-center justify-content-center rounded-2 navbar-btn navbar-square-btn"
             data-bs-toggle="offcanvas"
             data-bs-target="#navigationSidebar"
             aria-controls="navigationSidebar"
@@ -23,9 +22,10 @@
         <div class="d-flex align-items-center flex-nowrap">
           <!-- Search Icon -->
           <button
-            class="btn btn-outline-secondary me-2 d-flex align-items-center justify-content-center rounded-2 navbar-btn"
-            style="width: 40px; height: 40px;"
-            @click="toggleSearch"
+            class="btn btn-outline-secondary me-2 d-flex align-items-center justify-content-center rounded-2 navbar-btn navbar-square-btn"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#navigationSidebar"
+            aria-controls="navigationSidebar"
             aria-label="Toggle search"
           >
             <i class="bi bi-search fs-5"></i>
@@ -34,8 +34,7 @@
           <!-- User Dropdown -->
           <div class="dropdown position-relative">
             <button
-              class="btn btn-outline-secondary d-flex align-items-center justify-content-center rounded-2 navbar-btn"
-              style="width: 40px; height: 40px;"
+              class="btn btn-outline-secondary d-flex align-items-center justify-content-center rounded-2 navbar-btn navbar-square-btn"
               @click="toggleUserMenu"
               aria-label="User menu"
             >
@@ -53,59 +52,16 @@
         </div>
       </div>
     </nav>
-
-    <!-- Search Box - Positioned Below Navbar -->
-    <div v-show="showSearch" class="bg-light border-bottom border-top py-3">
-      <div class="container-fluid">
-        <div class="row justify-content-center">
-          <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-            <div class="input-group shadow-sm">
-              <span class="input-group-text bg-white border-end-0">
-                <i class="bi bi-search text-muted"></i>
-              </span>
-              <input
-                ref="searchInput"
-                v-model="searchQuery"
-                type="text"
-                class="form-control border-start-0 ps-1"
-                placeholder="Search..."
-                @keyup.enter="performSearch"
-                @keyup.escape="closeSearch"
-              >
-              <button
-                class="btn btn-outline-secondary"
-                @click="performSearch"
-                :disabled="!searchQuery.trim()"
-                :class="{ 'disabled': !searchQuery.trim() }"
-              >
-                Search
-              </button>
-              <button
-                class="btn btn-outline-danger"
-                @click="closeSearch"
-              >
-                <i class="bi bi-x fs-6"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, computed, nextTick, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
 // Router and route
 const route = useRoute()
 const router = useRouter()
-
-// Search functionality
-const showSearch = ref(false)
-const searchQuery = ref('')
-const searchInput = ref<HTMLInputElement | null>(null)
 
 // User menu functionality
 const showUserMenu = ref(false)
@@ -133,44 +89,12 @@ const currentPageTitle = computed(() => {
 })
 
 // Methods
-
-const toggleSearch = async () => {
-  showSearch.value = !showSearch.value
-  showUserMenu.value = false // Close user menu when opening search
-  
-  if (showSearch.value) {
-    await nextTick()
-    searchInput.value?.focus()
-  }
-}
-
 const toggleUserMenu = () => {
   showUserMenu.value = !showUserMenu.value
-  showSearch.value = false // Close search when opening user menu
-}
-
-const closeSearch = () => {
-  showSearch.value = false
-  searchQuery.value = ''
 }
 
 const closeUserMenu = () => {
   showUserMenu.value = false
-}
-
-const performSearch = () => {
-  const query = searchQuery.value.trim()
-  
-  if (!query) {
-    return
-  }
-  
-  // Show alert with searched text
-  alert(`Search feature not implemented yet.\nYou searched for: "${query}"`)
-  
-  // Clear search and close
-  searchQuery.value = ''
-  closeSearch()
 }
 
 const logout = () => {
@@ -178,12 +102,9 @@ const logout = () => {
   closeUserMenu()
 }
 
-// Handle escape key to close search and user menu
+// Handle escape key to close user menu
 const handleKeydown = (event: KeyboardEvent) => {
   if (event.key === 'Escape') {
-    if (showSearch.value) {
-      closeSearch()
-    }
     if (showUserMenu.value) {
       closeUserMenu()
     }
@@ -209,4 +130,11 @@ onUnmounted(() => {
   document.removeEventListener('click', handleClickOutside)
 })
 </script>
+
+<style scoped>
+.navbar-square-btn {
+  width: 40px;
+  height: 40px;
+}
+</style>
 

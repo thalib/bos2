@@ -15,6 +15,7 @@
       ></button>
     </div>
     <div class="offcanvas-body p-0">
+      <HeaderSearch />
       <HeaderDesktop :dismiss-offcanvas="true" />
     </div>
   </div>
