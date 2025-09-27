@@ -23,7 +23,7 @@ const route = useRoute()
 
 // Default fallback metadata
 const defaultPageMeta = {
-  title: 'BOS2 Application',
+  title: 'BOS2',
   description: 'BOS2 - Modern GraphQL frontend application'
 }
 
