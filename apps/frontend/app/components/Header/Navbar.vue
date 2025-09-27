@@ -9,10 +9,12 @@
           <button
             class="btn btn-outline-secondary me-3 d-flex align-items-center justify-content-center rounded-2 navbar-btn"
             style="width: 40px; height: 40px;"
-            @click="goHome"
-            aria-label="Go to home"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#navigationSidebar"
+            aria-controls="navigationSidebar"
+            aria-label="Open navigation menu"
           >
-            <i class="bi bi-house fs-5"></i>
+            <i class="bi bi-grid-3x3-gap-fill fs-5"></i>
           </button>
           <h5 class="mb-0 fw-semibold text-dark">{{ currentPageTitle }}</h5>
         </div>
@@ -131,9 +133,6 @@ const currentPageTitle = computed(() => {
 })
 
 // Methods
-const goHome = () => {
-  router.push('/')
-}
 
 const toggleSearch = async () => {
   showSearch.value = !showSearch.value

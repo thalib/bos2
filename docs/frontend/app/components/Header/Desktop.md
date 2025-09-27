@@ -13,6 +13,7 @@ edit the component directly to customize navigation links. It follows Bootstrap
 - **Self-Contained Design**: No props required, all configuration inside component
 - **Centered Layout**: Navigation cards centered horizontally across full width
 - **Card-Based Navigation**: Navigation items display as Bootstrap cards with icon and title
+- **Auto-Close Navigation**: Navigation links automatically close the parent offcanvas when clicked
 - **Responsive Design**: Cards wrap to multiple rows when space is limited
 - **Hover Effects**: Subtle elevation and shadow effects on card hover
 - **Bootstrap Icons**: Full support for Bootstrap Icons iconography
@@ -21,7 +22,12 @@ edit the component directly to customize navigation links. It follows Bootstrap
 
 ## Configuration
 
-To customize the component, edit the navigation links directly in the component file:
+### Props
+
+#### `dismissOffcanvas` (Optional)
+- **Type**: `boolean`
+- **Default**: `false`
+- **Description**: When set to `true`, navigation links will automatically close any parent Bootstrap offcanvas when clicked
 
 ### Navigation Links
 Edit the `navigationLinks` array in the component:
@@ -29,17 +35,21 @@ Edit the `navigationLinks` array in the component:
 ```typescript
 const navigationLinks: NavigationLink[] = [
   { title: "Home", link: "/", icon: "bi bi-house" },
-  { title: "Dashboard", link: "/dashboard", icon: "bi bi-speedometer2" },
-  { title: "Profile", link: "/profile", icon: "bi bi-person" }
+  { title: "GraphQL", link: "/graph", icon: "bi bi-speedometer2" }
 ]
 ```
 
-### NavigationLink Interface
+### TypeScript Interface
+
 ```typescript
 interface NavigationLink {
-  title: string    // Display text for the navigation item
-  link: string     // URL path for navigation (used with NuxtLink)  
-  icon: string     // Bootstrap Icons class (e.g., "bi bi-house")
+  title: string    // Navigation item display name
+  link: string     // Route path for NuxtLink navigation
+  icon: string     // Bootstrap Icons CSS class
+}
+
+interface Props {
+  dismissOffcanvas?: boolean  // Whether to close parent offcanvas on click
 }
 ```
 
@@ -71,10 +81,21 @@ Each navigation item renders as a Bootstrap card with:
 
 ## Usage Examples
 
-### Basic Usage (Self-Contained)
+### Basic Usage (Regular Page)
 ```vue
 <template>
   <HeaderDesktop />
+</template>
+```
+
+### Usage Inside Offcanvas (Auto-Close)
+```vue
+<template>
+  <div class="offcanvas offcanvas-start">
+    <div class="offcanvas-body">
+      <HeaderDesktop :dismiss-offcanvas="true" />
+    </div>
+  </div>
 </template>
 ```
 
@@ -135,8 +156,11 @@ interface NavigationLink {
 ## Implementation Notes
 
 - **Edit the Component Directly**: All configuration is done by editing constants in the component file
-- **No Props**: Component accepts no external configuration to keep it simple and self-contained
-- **Default Navigation**: Includes Home, Dashboard, and Profile links out of the box
+- **Programmatic Offcanvas Control**: Uses Bootstrap's JavaScript API for smooth close-then-navigate behavior
+- **Context-Aware Navigation**: Handles regular pages and offcanvas contexts intelligently
+- **Event-Based Timing**: Waits for offcanvas to fully close before navigating (no race conditions)
+- **Default Navigation**: Includes Home and GraphQL links out of the box
+- **Robust Fallbacks**: Works even if Bootstrap JavaScript is not available
 - **Centered Layout**: Navigation takes full width of navbar for balanced appearance
 
 ## Future Enhancements

@@ -10,6 +10,7 @@
             :to="item.link"
             class="text-decoration-none"
             :aria-label="`Navigate to ${item.title}`"
+            @click="handleNavigation(item.link)"
           >
             <div class="card border border-1 shadow-sm nav-card">
               <div class="card-body d-flex flex-column align-items-center justify-content-center p-3">
@@ -25,17 +26,59 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
+import { navigateTo } from '#app'
+
 interface NavigationLink {
   title: string
   link: string
   icon: string
 }
 
+interface Props {
+  dismissOffcanvas?: boolean
+}
+
+// Define props
+const props = withDefaults(defineProps<Props>(), {
+  dismissOffcanvas: false
+})
+
 // Self-contained navigation links - developers should edit this directly
 const navigationLinks: NavigationLink[] = [
   { title: "Home", link: "/", icon: "bi bi-house" },
   { title: "GraphQL", link: "/graph", icon: "bi bi-speedometer2" }
 ]
+
+// Handle navigation with offcanvas dismissal
+const handleNavigation = async (link: string) => {
+  if (props.dismissOffcanvas) {
+    // If we're in an offcanvas, close it first
+    const offcanvasElement = document.querySelector('#navigationSidebar')
+    if (offcanvasElement) {
+      // Use Bootstrap's programmatic API to close the offcanvas
+      const bootstrap = (window as any).bootstrap
+      if (bootstrap && bootstrap.Offcanvas) {
+        const offcanvasInstance = bootstrap.Offcanvas.getInstance(offcanvasElement) || new bootstrap.Offcanvas(offcanvasElement)
+        offcanvasInstance.hide()
+        
+        // Wait for the offcanvas to finish closing, then navigate
+        offcanvasElement.addEventListener('hidden.bs.offcanvas', () => {
+          navigateTo(link)
+        }, { once: true })
+      } else {
+        // Fallback if Bootstrap is not available
+        navigateTo(link)
+      }
+    } else {
+      // No offcanvas found, navigate normally
+      navigateTo(link)
+    }
+  } else {
+    // Not in offcanvas context, navigate normally
+    navigateTo(link)
+  }
+}
 </script>
 
 <style scoped>

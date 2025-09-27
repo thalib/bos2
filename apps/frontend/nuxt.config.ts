@@ -27,40 +27,24 @@ export default defineNuxtConfig({
     'bootstrap-icons/font/bootstrap-icons.css'
   ],
 
+  // Scripts configuration
+  app: {
+    head: {
+      viewport: 'width=device-width, initial-scale=1',
+      charset: 'utf-8',
+      script: [
+        {
+          src: 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js',
+          integrity: 'sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL',
+          crossorigin: 'anonymous'
+        }
+      ]
+    }
+  },
+
   // Development configuration
   devServer: {
     port: 3000,
     host: 'localhost'
   },
-
-  // Experimental features
-  experimental: {
-    // Enable Nuxt 4 directory structure
-    scanPageMeta: true,
-  },
-
-  // Nitro configuration optimized for SPA
-  nitro: {
-    // Enable CORS for development
-    devProxy: {
-      '/api/graphql': {
-        target: process.env.NUXT_PUBLIC_GRAPHQL_ENDPOINT || 'http://localhost:4000/graphql',
-        changeOrigin: true,
-        prependPath: true,
-      }
-    },
-    // Optimize for SPA deployment
-    prerender: {
-      crawlLinks: false
-    }
-  },
-
-  // SPA-specific optimizations
-  app: {
-    // Optimize bundle for client-side rendering
-    head: {
-      viewport: 'width=device-width, initial-scale=1',
-      charset: 'utf-8'
-    }
-  }
 })
