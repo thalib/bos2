@@ -1,6 +1,6 @@
 <template>
   <div>
-    <!-- Set page title and meta tags -->
+    <!-- Set page title and meta tags using page metadata -->
     <Head>
       <Title>{{ pageTitle }}</Title>
       <Meta name="description" :content="pageDescription" />
@@ -21,26 +21,20 @@ import HeaderSidebar from '~/components/Header/Sidebar.vue'
 
 const route = useRoute()
 
-// Dynamic page title based on current route
+// Default fallback metadata
+const defaultPageMeta = {
+  title: 'BOS2 Application',
+  description: 'BOS2 - Modern GraphQL frontend application'
+}
+
+// Get page title from route meta or use fallback
 const pageTitle = computed(() => {
-  const routeName = route.name as string
-  const titles: Record<string, string> = {
-    'index': 'Home - BOS2 Application',
-    'graph': 'GraphQL Playground - BOS2 Application', 
-    'test-graphql': 'GraphQL Test - BOS2 Application'
-  }
-  return titles[routeName] || 'BOS2 Application'
+  return route.meta?.title as string || defaultPageMeta.title
 })
 
-// Dynamic page description based on current route
+// Get page description from route meta or use fallback  
 const pageDescription = computed(() => {
-  const routeName = route.name as string
-  const descriptions: Record<string, string> = {
-    'index': 'BOS2 Application - Home page with navigation and search functionality',
-    'graph': 'Interactive GraphQL playground for testing queries and mutations',
-    'test-graphql': 'GraphQL testing interface with query examples and results'
-  }
-  return descriptions[routeName] || 'BOS2 - Modern GraphQL frontend application'
+  return route.meta?.description as string || defaultPageMeta.description
 })
 </script>
 

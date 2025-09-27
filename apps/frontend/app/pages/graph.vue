@@ -1,5 +1,7 @@
 <template>
   <div>
+
+    
     <h1>Books</h1>
     <div v-if="pending">Loading...</div>
     <div v-if="error">
@@ -25,6 +27,12 @@
 </template>
 
 <script setup lang="ts">
+// Define page metadata using Nuxt's standard approach
+definePageMeta({
+  title: 'GraphQL Playground',
+  description: 'Interactive GraphQL playground for testing queries and mutations'
+})
+
 // GraphQL query string
 const BOOKS_QUERY = `
   query GetBooks {

@@ -332,9 +332,10 @@ const testFileUpload = async () => {
   }
 }
 
-// Page metadata
+// Define page metadata using Nuxt's standard approach
 definePageMeta({
-  title: 'Unified GraphQL Test'
+  title: 'GraphQL Test',
+  description: 'GraphQL testing interface with query examples and results'
 })
 </script>
 
