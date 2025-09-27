@@ -14,6 +14,8 @@ applyTo: 'apps/frontend/**/*.{vue,ts,js,md,json,scss,css,yml}'
 - Use kebab-case for composables and utility files (e.g., `use-foo.ts`)
 - Use `.vue` for components/pages/layouts, `.ts` for composables, stores, utils, and config
 - Use `.md` for documentation, `.json` for config, `.scss`/`.css` for styles, `.yml` for workflows
+- Only support modern browsers (ES2020+)
+- This is a private app, no need of SEO and accessibility (a11y) compliance
 
 ## Component Guidelines
 - One component per file
